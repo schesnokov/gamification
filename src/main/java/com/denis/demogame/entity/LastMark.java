@@ -1,27 +1,31 @@
 package com.denis.demogame.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class LastMark {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User userOwner;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "employee_id")
+    private Employee owner;
 
     @Column
     private long markToUserId;
@@ -38,4 +42,35 @@ public class LastMark {
     @Column
     private LocalDateTime markExpiration;
 
+    @Override
+    public String toString() {
+        return "LastMark{" +
+                "id=" + id +
+                ", owner=" + owner +
+                ", markToUserId=" + markToUserId +
+                ", stat1='" + stat1 + '\'' +
+                ", stat2='" + stat2 + '\'' +
+                ", stat3='" + stat3 + '\'' +
+                ", markExpiration=" + markExpiration +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LastMark lastMark = (LastMark) o;
+        return id == lastMark.id &&
+                markToUserId == lastMark.markToUserId &&
+                Objects.equals(owner, lastMark.owner) &&
+                Objects.equals(stat1, lastMark.stat1) &&
+                Objects.equals(stat2, lastMark.stat2) &&
+                Objects.equals(stat3, lastMark.stat3) &&
+                Objects.equals(markExpiration, lastMark.markExpiration);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, owner, markToUserId, stat1, stat2, stat3, markExpiration);
+    }
 }
