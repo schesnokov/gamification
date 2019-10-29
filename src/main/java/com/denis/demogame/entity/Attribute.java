@@ -37,6 +37,18 @@ public class Attribute {
     @Column
     private int val3;
 
+    public Attribute() {
+    }
+
+    public Attribute(String stat1, int val1, String stat2, int val2, String stat3, int val3) {
+        this.stat1 = stat1;
+        this.val1 = val1;
+        this.stat2 = stat2;
+        this.val2 = val2;
+        this.stat3 = stat3;
+        this.val3 = val3;
+    }
+
     @Override
     public String toString() {
         return "Attribute{" +

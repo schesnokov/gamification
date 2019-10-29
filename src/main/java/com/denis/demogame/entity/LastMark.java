@@ -42,11 +42,22 @@ public class LastMark {
     @Column
     private LocalDateTime markExpiration;
 
+    public LastMark() {
+    }
+
+    public LastMark(Employee owner, long markToUserId, String stat1, String stat2, String stat3, LocalDateTime markExpiration) {
+        this.owner = owner;
+        this.markToUserId = markToUserId;
+        this.stat1 = stat1;
+        this.stat2 = stat2;
+        this.stat3 = stat3;
+        this.markExpiration = markExpiration;
+    }
+
     @Override
     public String toString() {
         return "LastMark{" +
                 "id=" + id +
-                ", owner=" + owner +
                 ", markToUserId=" + markToUserId +
                 ", stat1='" + stat1 + '\'' +
                 ", stat2='" + stat2 + '\'' +
@@ -62,7 +73,6 @@ public class LastMark {
         LastMark lastMark = (LastMark) o;
         return id == lastMark.id &&
                 markToUserId == lastMark.markToUserId &&
-                Objects.equals(owner, lastMark.owner) &&
                 Objects.equals(stat1, lastMark.stat1) &&
                 Objects.equals(stat2, lastMark.stat2) &&
                 Objects.equals(stat3, lastMark.stat3) &&
@@ -71,6 +81,6 @@ public class LastMark {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, owner, markToUserId, stat1, stat2, stat3, markExpiration);
+        return Objects.hash(id, markToUserId, stat1, stat2, stat3, markExpiration);
     }
 }

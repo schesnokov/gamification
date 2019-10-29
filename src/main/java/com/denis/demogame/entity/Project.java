@@ -29,6 +29,14 @@ public class Project {
     @ManyToMany(mappedBy = "projects", fetch = FetchType.EAGER)
     private Set<Employee> employees = new HashSet<>();
 
+    public Project() {
+    }
+
+    public Project(String projectName, Set<Employee> employees) {
+        this.projectName = projectName;
+        this.employees = employees;
+    }
+
     @Override
     public String toString() {
         return "Project{" +

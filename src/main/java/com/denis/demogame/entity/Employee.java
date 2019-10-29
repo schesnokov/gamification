@@ -50,6 +50,17 @@ public class Employee {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<LastMark> lastMarks = new HashSet<>();
 
+    public Employee() {
+    }
+
+    public Employee(String firstName, String secondName, Set<Project> projects, Attribute attribute, Set<LastMark> lastMarks) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.projects = projects;
+        this.attribute = attribute;
+        this.lastMarks = lastMarks;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
